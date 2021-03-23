@@ -14,7 +14,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import LinearProgress from "@material-ui/core/LinearProgress";
 //import { Dropdown } from "reactjs-dropdown-component";
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
+import { Dropdown } from 'reactjs-dropdown-component';
 
 function enviarDados(
   ResourceName,
@@ -64,6 +65,7 @@ export default function Formulario() {
   const [personEmail, setPersonEmail] = useState("");
   const [Market, setMarket] = useState("ASEAN");
   const [CU, setCU] = useState("");
+  const [Country, setCountry] = useState("");
   const [personTribe, setPersonTribe] = useState("");
   const [personSquad, setPersonSquad] = useState("");
   const [ideaName, setIdeaName] = useState("");
@@ -79,15 +81,15 @@ export default function Formulario() {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const Dropdown = dynamic(
-    async () => {
-      const module = await import('reactjs-dropdown-component');
-      const DD = module.Dropdown;
+  // const Dropdown = dynamic(
+  //   async () => {
+  //     const module = await import('reactjs-dropdown-component');
+  //     const DD = module.Dropdown;
   
-      return ({ forwardedRef, ...props }) => <DD ref={forwardedRef} {...props} />;
-    },
-    { ssr: false },
-  );
+  //     return ({ forwardedRef, ...props }) => <DD ref={forwardedRef} {...props} />;
+  //   },
+  //   { ssr: false },
+  // );
   
   const CUDW = [
     {
@@ -104,7 +106,10 @@ export default function Formulario() {
     }
   ];
  
-  const onChange = (item, name) => { console.log(item, name);}
+  // const onChangeDD = (item, name) => { 
+  //   console.log(item.value);
+  //   setCountry(item.value);
+  // }
     
   const handleClickOpen = () => {
     setOpen(true);
@@ -218,7 +223,7 @@ export default function Formulario() {
             name="Country"
             title="Select CU"
             list={CUDW}
-            //onChangedd={this.onChangedd}
+            onChange={(item) => setCountry(item.value)}
           />
         </Grid>         
         <Grid item xs={12}>
@@ -452,7 +457,7 @@ export default function Formulario() {
                 ResourceName,
                 personEmail,
                 Market,
-                CU,
+                Country,
                 personTribe,
                 personSquad,
                 title,
